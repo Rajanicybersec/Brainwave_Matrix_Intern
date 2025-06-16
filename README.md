@@ -1,77 +1,106 @@
-# Phishing Link Scanner 🔗🛡️
+# 🛡️ Malware Detection Tool
 
-This repository contains a Python-based **Phishing Link Scanner** developed as part of my internship at **Brainwave Matrix Solutions**.
+A Python-based malware detection tool that scans files for suspicious indicators using static analysis and SHA-256 hashing. This project is developed as part of an internship task to demonstrate practical skills in basic malware analysis.
 
-## 📌 Objective
-
-To build a tool that identifies and flags potential phishing URLs using a combination of regular expressions, domain analysis, and open threat intelligence APIs.
-
-## 🧠 Internship Details
-
-- **Company:** Brainwave Matrix Solutions
-- **Role:** Cybersecurity Intern
-- **Task:** Develop and document a functional phishing link detection tool
-- **Timeline:** May 2025
+---
 
 ## 🚀 Features
 
-- Detects phishing indicators in URLs
-- Validates domain structure and length
-- Checks for IP-based URLs
-- Flags suspicious keywords
-- Integrates with external APIs (e.g., VirusTotal / PhishTank) *(if applicable)*
-- Generates clear terminal output showing safe vs suspicious links
-
-## 🔧 Technologies Used
-
-- Python 3.x
-- Regex
-- `requests` (for API interaction)
-- Terminal-based user input/output
-
-## 📂 Project Structure
-
-```
-Brainwave_Matrix_Intern/
-├── phishing_link_scanner.py
-├── README.md
-└── sample_urls.txt  # (if you include test cases)
-```
-
-## 📝 Usage
-
-1. **Clone this repository:**
-   ```bash
-   git clone https://github.com/Rajanicybersec/Brainwave_Matrix_Intern
-   cd Brainwave_Matrix_Intern
-   ```
-
-2. **Run the scanner:**
-   -- Terminal
-   python phishing_link_scanner.py
-   --
-
-3. **Follow the prompts to input URLs for scanning.**
-
-## 📸 Social Proof
-
-A screenshot/video of the working code has been shared on [LinkedIn](https://www.linkedin.com/in/rajani-s-16a94b301/) with appropriate tags and company mention.
-
-## ✅ Submission
-
-The completed project has been submitted as per the instructions provided by Brainwave Matrix Solutions.
+- 🔍 **File Scanning**: Automatically scans files in a specified directory.
+- 🔐 **SHA-256 Hashing**: Calculates a unique hash for file identification and integrity checking.
+- ⚠️ **Static Analysis**: Flags suspicious patterns commonly found in malicious scripts, such as:
+  - `os.system`, `subprocess`, `eval`
+  - Network commands like `wget`, `curl`
+  - Obfuscation techniques like `base64`, `powershell`
+- 📂 **Modular Code Structure**: Organized for easy understanding and extension.
 
 ---
 
-### Disclaimer
+## 📁 Project Structure
 
-This tool is developed for educational purposes only. It should not be used for malicious activities or in production without proper review and validation.
+```
+malware_detector/
+├── scanner.py               # Main scanning script
+├── utils/
+│   ├── hash_utils.py        # SHA-256 hashing logic
+│   └── static_analysis.py   # Suspicious pattern detection
+├── samples/                 # Test files (malicious & clean)
+├── reports/                 # Optional report storage
+├── README.md                # Project documentation
+└── requirements.txt         # Required Python libraries
+```
 
 ---
 
-## 🙋‍♀️ About Me
+## 🛠️ How to Use
 
-**Rajani S.**  
-Aspiring cybersecurity professional | TryHackMe & Hack The Box enthusiast  
-Connect with me on [LinkedIn](https://www.linkedin.com/in/rajani-s-16a94b301/)  
-TryHackMe: [Rajanivapt](https://tryhackme.com/p/Rajanivapt)
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Rajanicybersec/Brainwave_Matrix_Intern/
+cd malware_detector
+```
+
+### 2. Set Up Environment
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. Add Files to Scan
+Place `.py`, `.sh`, `.exe`, or `.txt` files inside the `samples/` folder.
+
+### 4. Run the Tool
+```bash
+python scanner.py
+```
+
+---
+
+## 📄 Sample Output
+
+```
+[+] Scanning: samples/malicious1.py
+SHA-256 Hash: 3c1f87e55a9e4b...
+Suspicious Indicators Found:
+ - Suspicious keyword found: 'os.system'
+ - Suspicious keyword found: 'cmd.exe'
+```
+
+```
+[+] Scanning: samples/clean1.py
+SHA-256 Hash: 9ad7f982aa8d2...
+No immediate issues found.
+```
+
+---
+
+## 🧪 Sample Test Files
+
+| Filename        | Description                                |
+|----------------|--------------------------------------------|
+| malicious1.py   | Contains `os.system("cmd.exe")`            |
+| clean1.py       | Contains `print("This is a test script for malware scanning.")` |
+
+---
+
+## 📌 Notes
+
+- This tool uses **static analysis** only. It does not execute the files.
+- Only safe test samples should be used. Do **not** run real malware on your local machine.
+- For advanced detection, consider integrating **VirusTotal API** or using behavioral analysis in a VM.
+
+---
+
+## 👩‍💻 Author
+
+**S. Rajani**  
+📍 Bangalore, India  
+🔗 [LinkedIn](https://www.linkedin.com/in/rajani-s-16a94b301/)  
+🔗 [GitHub](https://github.com/Rajanicybersec)
+
+---
+
+## 📜 License
+
+This project is for educational and internship purposes only. Not intended for real-world malware analysis in production.
